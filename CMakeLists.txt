@@ -44,6 +44,7 @@ link_libraries(common)
 # Reusable CNDO/2 computational library
 add_library(cndo2 STATIC 
     src/cndo2_helpers.cpp
+    src/molecular_properties.cpp
 )
 
 target_include_directories(cndo2 PUBLIC 
@@ -56,3 +57,20 @@ add_executable(hw_5_2
 )
 
 target_link_libraries(hw_5_2 PRIVATE cndo2)
+
+# Enable CTest for automated testing
+enable_testing()
+
+# Unit test for atomic partial charges
+add_executable(test_atomic_charges
+    tests/test_atomic_charges.cpp
+)
+
+# Link the test executable to our CNDO/2 Library
+target_link_libraries(test_atomic_charges PRIVATE cndo2)
+
+# Register the test with CTest
+add_test(
+    NAME AtomicCharges 
+    COMMAND test_atomic_charges
+)
