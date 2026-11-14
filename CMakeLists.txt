@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.31)
 
-project (homework_5 LANGUAGES CXX)
+project (cndo/2_molecular_properties LANGUAGES CXX)
 
 # Compiler requirements
 set(CMAKE_CXX_STANDARD 20) 
@@ -41,6 +41,18 @@ link_libraries(common)
 
 # If Needed Make Modifications below this line 
 
-add_executable(hw_5_2 
-    src/hw_5_2.cpp
-    src/cndo2_helpers.cpp)
+# Reusable CNDO/2 computational library
+add_library(cndo2 STATIC 
+    src/cndo2_helpers.cpp
+)
+
+target_include_directories(cndo2 PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src 
+)
+
+# Existing command-line application 
+add_executable(hw_5_2
+    src/hw_5_2.cpp 
+)
+
+target_link_libraries(hw_5_2 PRIVATE cndo2)
