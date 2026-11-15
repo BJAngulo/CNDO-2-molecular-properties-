@@ -74,3 +74,19 @@ add_test(
     NAME AtomicCharges 
     COMMAND test_atomic_charges
 )
+
+# Integration test using actual CNDO/2 SCF results 
+add_executable(test_scf_atomic_charges 
+    tests/test_scf_atomic_charges.cpp)
+
+target_link_libraries(test_scf_atomic_charges PRIVATE cndo2)
+
+add_test(
+    NAME SCFAtomicCharges
+    COMMAND test_scf_atomic_charges
+)
+
+# Run from the project root so the solver can find basis/file 
+set_tests_properties(SCFAtomicCharges PROPERTIES 
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+)
