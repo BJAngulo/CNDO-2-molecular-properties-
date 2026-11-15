@@ -53,3 +53,35 @@ arma::vec calculate_atomic_charges(
 
     return charges;
 }
+
+// Calculate the charge-based molecular dipole moment
+arma::vec calculate_dipole_moment(
+    const std::vector<Atom>& atoms,
+    const arma::vec& charges
+) {
+    // Verify that each atom has a corresponding charge 
+    if (charges.n_elem != atoms.size()) {
+        throw std::invalid_argument(
+            "Number of atomic charges does not match number of atoms"
+        );
+    }
+
+    // Initialize the dipole vector (x, y, z) to zero
+    arma::vec dipole(3, arma::fill::zeros);
+
+    // Accumulate each atoms contribution to the dipole moment 
+    for (size_t i = 0; i < atoms.size(); i++) {
+        const double charge = charges(i);
+
+        dipole(0) += charge * atoms[i].x;
+        dipole(1) += charge * atoms[i].y;
+        dipole(2) += charge * atoms[i].z;
+    }
+
+    // Convert electron-Angstroms to Debye
+    constexpr double EANGSTRONG_TO_DEBYE = 4.8032047;
+
+    dipole *= EANGSTRONG_TO_DEBYE; 
+    
+    return dipole;
+}

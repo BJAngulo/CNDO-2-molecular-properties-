@@ -90,3 +90,15 @@ add_test(
 set_tests_properties(SCFAtomicCharges PROPERTIES 
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
 )
+
+# Unit tests for charge-based molecular dipole moments
+add_executable(test_dipole_moment 
+    tests/test_dipole_moment.cpp
+)
+
+target_link_libraries(test_dipole_moment PRIVATE cndo2)
+
+add_test(
+    NAME DipoleMoment
+    COMMAND test_dipole_moment
+)
