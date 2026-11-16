@@ -47,7 +47,7 @@ int main() {
         calculate_dipole_moment(hf_atoms, hf_charges);
 
     // Expected x-component in Debye
-    const double expected_mu_x = -0.30 * 0.92 * 4.8032047;
+    const double expected_mu_x = -0.30 * 0.92 * 2.541746;
 
     // Verify the x-component
     if (std::abs(hf_dipole(1)) > tolerance ||

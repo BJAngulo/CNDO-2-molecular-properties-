@@ -78,10 +78,10 @@ arma::vec calculate_dipole_moment(
         dipole(2) += charge * atoms[i].z;
     }
 
-    // Convert electron-Angstroms to Debye
-    constexpr double EANGSTRONG_TO_DEBYE = 4.8032047;
-
-    dipole *= EANGSTRONG_TO_DEBYE; 
+    // Atomic coordinates are in Bohr.
+    // Convert electron-Bohr to Debye.
+    constexpr double EBOHR_TO_DEBYE = 2.541746;
+    dipole *= EBOHR_TO_DEBYE; 
     
     return dipole;
 }

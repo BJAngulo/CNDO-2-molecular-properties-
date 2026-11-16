@@ -102,3 +102,21 @@ add_test(
     NAME DipoleMoment
     COMMAND test_dipole_moment
 )
+
+# Integration test for SCF-derived molecular dipole moments 
+add_executable(test_scf_dipole
+    tests/test_scf_dipole.cpp 
+)
+
+target_link_libraries(test_scf_dipole PRIVATE cndo2)
+
+add_test(
+    NAME SCFDipole 
+    COMMAND test_scf_dipole
+)
+
+# Run from project root to locate STO-3G basis files 
+set_tests_properties(SCFDipole PROPERTIES 
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" 
+)
+
