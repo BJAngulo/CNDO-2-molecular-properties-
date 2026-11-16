@@ -85,3 +85,28 @@ arma::vec calculate_dipole_moment(
     
     return dipole;
 }
+
+double calculate_homo_lumo_gap(
+    const arma::vec& orbital_energies,
+    int num_electrons
+) {
+    // Validate that both a HOMO and LUMP exist
+    if (num_electrons <= 0 ||
+        static_cast<arma::uword>(num_electrons) >= orbital_energies.n_elem) {
+        throw std::invalid_argument(
+            "HOMO-LUMO gap requires at least one occupied "
+            " and one unoccupied orbital"
+        );
+    }
+
+    // Identify the HOMO and LUMO indices 
+    arma::uword homo_index =
+        static_cast<arma::uword>(num_electrons - 1);
+
+    arma::uword lumo_index = 
+        static_cast<arma::uword>(num_electrons);
+
+    // Calculate orbital-energy gap (eV)
+    return orbital_energies(lumo_index) -
+           orbital_energies(homo_index);
+}

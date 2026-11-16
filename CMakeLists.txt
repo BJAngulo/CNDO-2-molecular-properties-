@@ -120,3 +120,35 @@ set_tests_properties(SCFDipole PROPERTIES
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" 
 )
 
+# HOMO-LUMO energy gap unit test
+add_executable(test_homo_lumo_gap
+    tests/test_homo_lumo_gap.cpp 
+)
+
+target_link_libraries(test_homo_lumo_gap
+    PRIVATE cndo2 
+)
+
+add_test(
+    NAME HOMOLUMOGap
+    COMMAND test_homo_lumo_gap  
+)
+
+# HOMO-LUMO SCF integration test 
+add_executable(test_scf_homo_lumo_gap
+    tests/test_scf_homo_lumo_gap.cpp 
+)
+
+target_link_libraries(test_scf_homo_lumo_gap
+    PRIVATE cndo2
+)
+
+add_test(
+    NAME SCFHOMOLUMOGap 
+    COMMAND test_scf_homo_lumo_gap
+)
+
+set_tests_properties(SCFHOMOLUMOGap PROPERTIES 
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+)
+

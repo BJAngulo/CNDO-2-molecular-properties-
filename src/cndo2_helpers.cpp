@@ -1109,6 +1109,8 @@ SCFResult run_scf(
     result.S = S;
     result.gamma = gamma;
     result.H_core = H_core;
+    result.orbital_energies_alpha = final_epsilon_alpha;
+    result.orbital_energies_beta = final_epsilon_beta;
 
     result.basis_functions = basis_functions;
     result.basis_to_atom = basis_to_atom;

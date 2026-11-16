@@ -35,6 +35,9 @@ struct SCFResult {
     arma::mat S;
     arma::mat gamma;
     arma::mat H_core;
+    
+    arma::vec orbital_energies_alpha;
+    arma::vec orbital_energies_beta;
 
     std::vector<BasisFunction> basis_functions;
     std::vector<size_t> basis_to_atom;
